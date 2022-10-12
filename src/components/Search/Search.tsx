@@ -8,8 +8,11 @@ function Search({}: Props) {
 	const navigate = useNavigate();
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		return navigate(`/products/search?query=${query}`);
-		// return <Navigate to={`/products/search?query=${query}`} />;
+		if (query) {
+			return navigate(`/products/search?query=${query}`);
+		} else {
+			return navigate(`/`);
+		}
 	};
 
 	return (
