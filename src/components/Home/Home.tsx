@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
+import ProductsList from "../Products/ProductsList";
 
 interface Props {}
 
 function Home({}: Props) {
-  return (
-    <div>Home</div>
-  )
+	return (
+		<div>
+			<ProductsList />
+		</div>
+	);
 }
 
-export default Home
+export default Home;
