@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import { doc, setDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { auth } from "../../app/firebase";
+import { auth, db } from "../../app/firebase";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { createShoppingCart } from "../../lib/shoppingCart";
 
 interface Props {}
 
@@ -17,12 +19,25 @@ function Register({}: Props) {
 	const navigate = useNavigate();
 
 	// get the current user if there is
-	const { user: currentUser } = useAuthContext();
+	const { user: currentUser, isAuthReady, dispatch } = useAuthContext();
 
-	// if already logged in
-	if (currentUser) {
-		return <Navigate to='/' />;
-	}
+	useEffect(() => {
+		const createShoppingCart = async () => {
+			const shoppingCart = {
+				products: [],
+			};
+			if (currentUser) {
+				await setDoc(
+					doc(db, "shoppingCart", currentUser.uid),
+					shoppingCart
+				);
+			}
+		};
+		if (currentUser) {
+			createShoppingCart();
+			navigate("/");
+		}
+	}, [currentUser]);
 
 	// function for onChange events
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,10 +51,6 @@ function Register({}: Props) {
 		e.preventDefault();
 		// register user and if successful redirect to home page
 		await createUserWithEmailAndPassword(formData.email, formData.password);
-
-		if (!loading && !error) {
-			navigate("/");
-		}
 	};
 
 	return (

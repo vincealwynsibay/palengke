@@ -1,6 +1,8 @@
+import { signOut } from "firebase/auth";
 import React, { useEffect } from "react";
 import { Route } from "react-router";
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Routes } from "react-router-dom";
+import { auth } from "./app/firebase";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Home from "./components/Home/Home";
@@ -12,12 +14,19 @@ import { seedProducts } from "./lib/seedProducts";
 interface Props {}
 
 function App({}: Props) {
-	const { isAuthReady } = useAuthContext();
+	const { isAuthReady, user } = useAuthContext();
+
+	const logout = () => {
+		signOut(auth);
+	};
 	return (
 		<div>
 			{isAuthReady ? (
 				<BrowserRouter>
 					<Search />
+					{user && <p>{user.email}</p>}
+					{user && <a onClick={logout}>logout</a>}
+					{!user && <Link to='/register'>Register</Link>}
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route

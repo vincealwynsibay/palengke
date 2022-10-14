@@ -24,7 +24,6 @@ function ProductsList({}: Props) {
 	);
 
 	useEffect(() => {
-		console.log(queryText);
 		if (!loading) {
 			if (filter === "all") {
 				setProducts(snapshot!.docs);
@@ -36,8 +35,6 @@ function ProductsList({}: Props) {
 			}
 		}
 	}, [loading, filter]);
-
-	console.log(filter);
 
 	if (loading) {
 		return <div>loading...</div>;
