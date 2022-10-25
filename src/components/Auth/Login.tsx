@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { auth } from "../../app/firebase";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import ProtectedRoute from "./ProtectedRoute";
 
 interface Props {}
 
@@ -11,6 +12,8 @@ function Login({}: Props) {
 		email: "",
 		password: "",
 	});
+
+	<ProtectedRoute />;
 
 	const [signInWithEmailAndPassword, user, loading, error] =
 		useSignInWithEmailAndPassword(auth);

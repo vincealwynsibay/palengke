@@ -4,7 +4,6 @@ import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { auth, db } from "../../app/firebase";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { createShoppingCart } from "../../lib/shoppingCart";
 
 interface Props {}
 
@@ -26,11 +25,15 @@ function Register({}: Props) {
 			const shoppingCart = {
 				products: [],
 			};
+			const orders = {
+				products: [],
+			};
 			if (currentUser) {
 				await setDoc(
-					doc(db, "shoppingCart", currentUser.uid),
+					doc(db, "shoppingCarts", currentUser.uid),
 					shoppingCart
 				);
+				await setDoc(doc(db, "orders", currentUser.uid), orders);
 			}
 		};
 		if (currentUser) {
