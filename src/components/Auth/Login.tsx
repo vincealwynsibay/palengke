@@ -4,8 +4,52 @@ import { auth } from "../../app/firebase";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import ProtectedRoute from "./ProtectedRoute";
+import styled from "styled-components";
 
 interface Props {}
+
+const Container = styled.div`
+	position: relative;
+	height: 80vh;
+	text-align: left;
+	background: white;
+	z-index: 2;
+	border-radius: 3px;
+	margin: 0 auto;
+	max-width: max(50%, 600px);
+	padding: 2rem 3rem;
+`;
+const Header = styled.h2`
+	font-weight: 600;
+	margin-bottom: 2rem;
+`;
+const InputContainer = styled.div`
+	margin-bottom: 1.5rem;
+`;
+const Label = styled.label`
+	text-transform: uppercase;
+	margin-bottom: 1.5rem;
+`;
+const Input = styled.input`
+	display: block;
+	background: none;
+	border: 1px solid #1a202c;
+	padding: 1rem;
+	width: 100%;
+`;
+const Button = styled.button`
+	background-color: #1dbe74;
+	border: none;
+	padding: 1rem 2rem;
+	font-weight: 700;
+	font-size: 1rem;
+	color: #fff;
+	text-transform: uppercase;
+	width: 100%;
+`;
+const RedirectLink = styled(Link)`
+	color: #1dbe74;
+`;
 
 function Login({}: Props) {
 	const [formData, setFormData] = useState({
@@ -46,36 +90,37 @@ function Login({}: Props) {
 	};
 
 	return (
-		<div>
-			<h1>Login</h1>
+		<Container>
+			<Header>Log In</Header>
 			<form onSubmit={handleSubmit}>
-				<div>
-					<label htmlFor=''>Email</label>
-					<input type='email' name='email' onChange={handleChange} />
-				</div>
-				<div>
-					<label htmlFor=''>Password</label>
-					<input
+				<InputContainer>
+					<Label htmlFor=''>Email</Label>
+					<Input type='email' name='email' onChange={handleChange} />
+				</InputContainer>
+				<InputContainer>
+					<Label htmlFor=''>Password</Label>
+					<Input
 						type='password'
 						name='password'
 						onChange={handleChange}
 					/>
-				</div>
+				</InputContainer>
 				{/*  if there is error display message  */}
 				{error && <p>{error.message}</p>}
 				{/* disable button to avoid repeated network requests */}
 				{loading ? (
-					<button type='submit' disabled>
+					<Button type='submit' disabled>
 						loading...
-					</button>
+					</Button>
 				) : (
-					<button type='submit'>Login</button>
+					<Button type='submit'>Login</Button>
 				)}
 			</form>
 			<p>
-				Don't have an account yet? <Link to='/register'>Register</Link>
+				Don't have an account yet?{" "}
+				<RedirectLink to='/register'>Register</RedirectLink>
 			</p>
-		</div>
+		</Container>
 	);
 }
 

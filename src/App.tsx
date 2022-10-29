@@ -7,10 +7,10 @@ import Dashboard from "./components/admin/Dashboard";
 import Login from "./components/Auth/Login";
 import ProtectedRoutes from "./components/Auth/ProtectedRoute";
 import Register from "./components/Auth/Register";
-import Home from "./components/Home/Home";
-import Navbar from "./components/Navbar/Navbar";
+import Home from "./components/Home/Home.styled";
+import Navbar from "./components/Navbar/Navbar.styled";
 import OrdersList from "./components/Orders/OrdersList";
-import ProductsList from "./components/Products/ProductsList";
+import ProductsList from "./components/Products/ProductsList.styled";
 import ProductView from "./components/Products/ProductView";
 import Search from "./components/Search/Search";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
@@ -26,7 +26,6 @@ function App({}: Props) {
 			{isAuthReady ? (
 				<BrowserRouter>
 					<Navbar />
-					<Search />
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route

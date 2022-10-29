@@ -1,11 +1,27 @@
 import { collection, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
+import styled from "styled-components";
 import { db } from "../../app/firebase";
 import { useQuery } from "../../hooks/useQuery";
-import Filter from "../Filter/Filter";
-import ProductItem from "./ProductItem";
+import Filter from "../Filter/Filter.styled";
+import Wrapper from "../Layout/Wrapper";
+import Search from "../Search/Search";
+import ProductItem from "./ProductItem.styled";
 interface Props {}
+
+const Container = styled.div`
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	grid-gap: 1rem;
+`;
+
+const SearchBar = styled(Search)`
+	@media (min-width: 48rem) {
+		display: none;
+	}
+`;
+const SortFilterContainer = styled.div``;
 
 function ProductsList({}: Props) {
 	const [filter, setFilter] = useState("all");
@@ -43,23 +59,28 @@ function ProductsList({}: Props) {
 	const filterList = ["all", "fruit", "vegetable", "dairy", "meat"];
 
 	return (
-		<div>
-			<h1>ProductsList</h1>
-			<Filter list={filterList} setFilter={setFilter} />
-			<div className='product-list'>
-				{products &&
-					products.map((doc) => {
-						return (
-							<ProductItem
-								key={doc.id}
-								id={doc.id}
-								data={doc.data()}
-							/>
-						);
-					})}
-				{products.length === 0 && <div>No products found</div>}
+		<Wrapper>
+			<div className=''>
+				<SortFilterContainer>
+					<SearchBar className='' />
+					<Filter list={filterList} setFilter={setFilter} />
+				</SortFilterContainer>
+
+				<Container className='products-list'>
+					{products &&
+						products.map((doc) => {
+							return (
+								<ProductItem
+									key={doc.id}
+									id={doc.id}
+									data={doc.data()}
+								/>
+							);
+						})}
+					{products.length === 0 && <div>No products found</div>}
+				</Container>
 			</div>
-		</div>
+		</Wrapper>
 	);
 }
 
