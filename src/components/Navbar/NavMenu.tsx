@@ -13,7 +13,6 @@ interface Props {
 const Menu = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
 	position: absolute;
 	left: 50%;
 	top: 100%;
@@ -21,13 +20,17 @@ const Menu = styled.div`
 	z-index: 999;
 	text-align: center;
 	background: #fff;
-	padding: 2rem;
 	border-radius: 3px;
-	width: 12.5rem;
+	width: 16.5rem;
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 	> * {
 		display: block;
+		padding: 1rem 1rem;
+
+		:hover {
+			background: #f8fbfa;
+		}
 	}
 	@media screen and (min-width: 48rem) {
 		display: none;

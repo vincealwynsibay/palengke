@@ -21,7 +21,11 @@ const SearchBar = styled(Search)`
 		display: none;
 	}
 `;
-const SortFilterContainer = styled.div``;
+const SortFilterContainer = styled.div`
+	@media (min-width: 48rem) {
+		margin: 1rem 0;
+	}
+`;
 
 function ProductsList({}: Props) {
 	const [filter, setFilter] = useState("all");
@@ -71,7 +75,7 @@ function ProductsList({}: Props) {
 						products.map((doc) => {
 							return (
 								<ProductItem
-									key={doc.id}
+									key={doc.id + doc.data().data_added}
 									id={doc.id}
 									data={doc.data()}
 								/>

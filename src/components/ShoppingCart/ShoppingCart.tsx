@@ -8,16 +8,53 @@ import {
 	updateDoc,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import {
-	useCollection,
-	useDocument,
-	useDocumentOnce,
-} from "react-firebase-hooks/firestore";
+import { useDocument } from "react-firebase-hooks/firestore";
+import styled from "styled-components";
 import { db } from "../../app/firebase";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import ShoppingCartHeader from "./ShoppingCartHeader";
 import ShoppingCartItem from "./ShoppingCartItem";
 
 interface Props {}
+const Container = styled.div`
+	width: 90%;
+	margin: 0 auto;
+`;
+const ShoppingItemsContainer = styled.div`
+	display: grid;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+	padding: 2rem;
+`;
+
+const TotalAndCheckoutContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+`;
+const TotalPrice = styled.p`
+	text-align: left;
+`;
+const Button = styled.button`
+	cursor: pointer;
+	background: #1dbe74;
+	border: none;
+	padding: 1rem 2rem;
+	color: #fff;
+	border-radius: 3px;
+	text-transform: uppercase;
+	font-weight: 600;
+	text-align: right;
+
+	transition: background-color 0.2s ease-in-out transform 0.2s ease-in-out;
+	:hover {
+		background-color: #1cb66e;
+		transform: translateY(-1px);
+	}
+
+	:active {
+		transform: translateY(1px);
+	}
+`;
 
 function ShoppingCart({}: Props) {
 	const { user } = useAuthContext();
@@ -43,6 +80,7 @@ function ShoppingCart({}: Props) {
 			addDoc(collection(db, "orders"), {
 				product,
 				buyer_id: user.uid,
+				date_added: Date.now(),
 			});
 		});
 		// clear shopping cart
@@ -54,30 +92,41 @@ function ShoppingCart({}: Props) {
 	};
 
 	return (
-		<div>
-			<div>
-				{products &&
-					products.map((product: any) => {
-						return (
-							<ShoppingCartItem
-								product={product}
-								key={product.product_id}
-							/>
-						);
-					})}
-			</div>
+		<Container>
+			<ShoppingItemsContainer>
+				<ShoppingCartHeader />
+				<div>
+					{products &&
+						products.map((product: any) => {
+							return (
+								<ShoppingCartItem
+									product={product}
+									key={
+										product.product_id + product.date_added
+									}
+								/>
+							);
+						})}
+				</div>
+			</ShoppingItemsContainer>
 
-			<p>
-				Total:{" "}
-				{products &&
-					products.reduce(
-						(acc: any, curr: any) =>
-							acc + curr.price * curr.quantity,
-						0
-					)}
-			</p>
-			<button onClick={() => checkOut()}>Check out</button>
-		</div>
+			<TotalAndCheckoutContainer>
+				<div>
+					<TotalPrice>
+						Total: $
+						{products &&
+							products
+								.reduce(
+									(acc: any, curr: any) =>
+										acc + curr.price * curr.quantity,
+									0
+								)
+								.toFixed(2)}
+					</TotalPrice>
+					<Button onClick={() => checkOut()}>Check out</Button>
+				</div>
+			</TotalAndCheckoutContainer>
+		</Container>
 	);
 }
 

@@ -24,6 +24,10 @@ const NavBrand = styled(Link)`
 	font-size: 1.5rem;
 	color: #1dbe74;
 	font-weight: 700;
+	transition: background-color 0.2s ease-in-out;
+	:hover {
+		color: #1cb66e;
+	}
 `;
 
 const NavToggle = styled.div`

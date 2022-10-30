@@ -18,6 +18,10 @@ const Links = styled.div`
 
 const ShoppingCartIcon = styled(AiOutlineShoppingCart)`
 	transform: scale(1.5);
+	transition: background-color 0.2s ease-in-out;
+	:hover {
+		color: #1cb66e;
+	}
 `;
 
 function NavLinks({}: Props) {

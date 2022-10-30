@@ -13,7 +13,6 @@ const Container = styled.div`
 	gap: 1rem;
 
 	@media screen and (min-width: 48rem) {
-		justify-content: flex-start;
 		margin: 0;
 	}
 `;
@@ -40,7 +39,11 @@ function Filter({ list, setFilter }: Props) {
 			<Select name='' id='' onChange={(e) => setFilter(e.target.value)}>
 				{list &&
 					list.map((item) => {
-						return <Option value={item}>{item}</Option>;
+						return (
+							<Option key={item} value={item}>
+								{item}
+							</Option>
+						);
 					})}
 			</Select>
 		</Container>

@@ -7,12 +7,16 @@ interface Props {
 }
 
 const Container = styled.div`
-	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	transition: box-shadow 0.2 ease-in-out;
+	:hover {
+		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	}
 `;
 
 const ProductDetails = styled.div`
 	text-align: center;
-	margin: 1rem 0;
+	margin: 2rem 0;
 `;
 
 const Image = styled.img`
@@ -22,11 +26,11 @@ const Image = styled.img`
 
 const Name = styled.h2`
 	font-size: 1.3rem;
-	margin: 0;
-	font-weight: 500;
+	margin: 0 0 1rem 0;
+	font-weight: 600;
 `;
 const Price = styled.p`
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	color: #1dbe74;
 
 	font-weight: 500;
@@ -44,7 +48,7 @@ function ProductItem({ data, id }: Props) {
 					{data.name[0].toUpperCase()}
 					{data.name.substring(1).toLowerCase()}
 				</Name>
-				<Price>${data.price}</Price>
+				<Price>${data.price.toFixed(2)}</Price>
 			</ProductDetails>
 		</Container>
 	);

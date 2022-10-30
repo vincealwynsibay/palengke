@@ -12,19 +12,30 @@ const AvatarIcon = styled(BsPersonCircle)`
 	transform: scale(1.5);
 	position: relative;
 	cursor: pointer;
+
+	:hover {
+		color: #1cb66e;
+	}
 `;
 
 const Menu = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
 	position: absolute;
 	top: 100%;
 	transform: translate(-50%, 0);
 	background: #fff;
-	padding: 1rem;
 	border-radius: 3px;
 	z-index: 999;
+
+	> * {
+		display: block;
+		padding: 0.7rem 1rem;
+
+		:hover {
+			background: #f8fbfa;
+		}
+	}
 `;
 
 function Avatar({}: Props) {

@@ -20,6 +20,7 @@ interface Props {}
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
+	margin: 2rem 1rem;
 
 	gap: 2rem;
 	> * {
@@ -27,7 +28,9 @@ const Container = styled.div`
 	}
 
 	@media screen and (min-width: 48rem) {
+		align-items: center;
 		flex-direction: row;
+		margin: 5rem 6.25rem;
 	}
 `;
 const ProductDetails = styled.div`
@@ -61,6 +64,7 @@ const QuantityValue = styled.div`
 	width: 4rem;
 	background: #f6f8fc;
 	padding: 1rem;
+	text-align: center;
 `;
 const QuantityButton = styled.button`
 	cursor: pointer;
@@ -69,8 +73,13 @@ const QuantityButton = styled.button`
 	padding: 1rem;
 	color: #1dbe74;
 	font-weight: 600;
+	transition: background-color 0.3s ease-in-out;
+	:hover {
+		color: #1cb66e;
+	}
 `;
 const Button = styled.button`
+	cursor: pointer;
 	border: none;
 	padding: 1rem 2rem;
 	font-size: 1rem;
@@ -78,11 +87,21 @@ const Button = styled.button`
 	color: #fff;
 	background-color: #1dbe74;
 	border-radius: 3px;
+	transition: background-color 0.2s ease-in-out transform 0.2s ease-in-out;
+	:hover {
+		background-color: #1cb66e;
+		transform: translateY(-1px);
+	}
+
+	:active {
+		transform: translateY(1px);
+	}
 `;
 
 const Image = styled.img`
 	aspect-ratio: 1/1;
-	width: 100%;
+	max-width: 100%;
+	max-height: 65vh;
 `;
 
 function ProductView({}: Props) {
@@ -116,6 +135,7 @@ function ProductView({}: Props) {
 				image: data.photoUrls.small,
 				price: data.price,
 				quantity,
+				date_added: Date.now(),
 			},
 		];
 
@@ -128,7 +148,10 @@ function ProductView({}: Props) {
 
 	return (
 		<Container>
-			<Image src={data.photoUrls.regular} alt='' />
+			<div>
+				<Image src={data.photoUrls.regular} alt='' />
+			</div>
+
 			<ProductDetails>
 				<Category>{data.category}</Category>
 				<Name>{data.name}</Name>
