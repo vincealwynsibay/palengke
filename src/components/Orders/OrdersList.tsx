@@ -11,7 +11,7 @@ interface Props {}
 
 const Container = styled.div`
 	width: 90%;
-	margin: 0 auto;
+	margin: 3rem auto;
 `;
 
 const OrderItemsContainer = styled.div`

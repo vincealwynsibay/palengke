@@ -18,7 +18,7 @@ import ShoppingCartItem from "./ShoppingCartItem";
 interface Props {}
 const Container = styled.div`
 	width: 90%;
-	margin: 0 auto;
+	margin: 3rem auto;
 `;
 const ShoppingItemsContainer = styled.div`
 	display: grid;
