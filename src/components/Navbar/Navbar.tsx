@@ -70,7 +70,7 @@ function Navbar({}: Props) {
 	return (
 		<div>
 			<Nav>
-				<NavBrand to='/'>Wet Market</NavBrand>
+				<NavBrand to='/'>Palengke</NavBrand>
 				<SearchBar className='' />
 
 				<NavToggle onClick={() => setToggle(!toggle)}>

@@ -4,10 +4,11 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
 import { db } from "../../app/firebase";
 import { useQuery } from "../../hooks/useQuery";
-import Filter from "../Filter/Filter.styled";
+import Filter from "../Filter/Filter";
 import Wrapper from "../Layout/Wrapper";
+import Loading from "../Loading/Loading";
 import Search from "../Search/Search";
-import ProductItem from "./ProductItem.styled";
+import ProductItem from "./ProductItem";
 interface Props {}
 
 const Container = styled.div`
@@ -57,11 +58,7 @@ function ProductsList({}: Props) {
 	}, [loading, filter]);
 
 	if (loading) {
-		return (
-			<Wrapper>
-				<div>loading...</div>
-			</Wrapper>
-		);
+		return <Loading />;
 	}
 
 	const filterList = ["all", "fruit", "vegetable", "dairy", "meat"];

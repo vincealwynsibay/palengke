@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import Avatar from "./Avatar.styled";
+import Avatar from "./Avatar";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import styled from "styled-components";
 

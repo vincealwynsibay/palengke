@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ProductsList from "../Products/ProductsList.styled";
+import ProductsList from "../Products/ProductsList";
 import hero from "../../assets/hero.jpg";
 
 interface Props {}
@@ -36,7 +36,7 @@ const Overlay = styled.div`
 	width: 100%;
 	height: 100%;
 	z-index: 1;
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.61);
 	color: #fff;
 	display: flex;
 	flex-direction: column;
@@ -52,7 +52,7 @@ function Home({}: Props) {
 			<Hero>
 				<Overlay>
 					<h1>
-						Welcome to the <span> Palengke! </span>
+						Welcome to <span> Palengke! </span>
 					</h1>
 					<p>
 						A place where you can buy <span>organic</span> and{" "}
