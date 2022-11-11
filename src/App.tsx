@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth";
 import React, { useEffect } from "react";
-import { Route } from "react-router";
+import { Navigate, Route } from "react-router";
 import { BrowserRouter, Link, Routes } from "react-router-dom";
 import { auth } from "./app/firebase";
 import Dashboard from "./components/Admin/Dashboard";
@@ -25,7 +25,7 @@ const themeState = {
 	primary: "#eeeeee",
 	neutral: "#ffffff",
 	accent: "#4E944F",
-	accentHover: "#83BD75",
+	accentHover: "#B4E197",
 	black: "#111111",
 	lightGray: "#999999",
 	gray: "#666666",
@@ -45,6 +45,8 @@ function App() {
 		// 	.catch();
 	}, []);
 
+	const { user } = useAuthContext();
+
 	return (
 		<div>
 			<ThemeProvider theme={themeState}>
@@ -61,14 +63,33 @@ function App() {
 								path='/products/search'
 								element={<ProductsList />}
 							/>
-							<Route path='/login' element={<Login />} />
+							<Route
+								path='/login'
+								element={user ? <Navigate to='/' /> : <Login />}
+							/>
 
-							<Route path='/register' element={<Register />} />
+							<Route
+								path='/register'
+								element={
+									user ? <Navigate to='/' /> : <Register />
+								}
+							/>
 							<Route
 								path='/shoppingCart'
-								element={<ShoppingCart />}
+								element={
+									!user ? (
+										<Navigate to='/' />
+									) : (
+										<ShoppingCart />
+									)
+								}
 							/>
-							<Route path='/orders' element={<OrdersList />} />
+							<Route
+								path='/orders'
+								element={
+									!user ? <Navigate to='/' /> : <OrdersList />
+								}
+							/>
 						</Routes>
 					</BrowserRouter>
 				) : (

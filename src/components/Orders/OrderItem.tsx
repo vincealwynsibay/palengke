@@ -9,8 +9,7 @@ const Item = styled.div`
 	display: grid;
 	font-size: 0.8rem;
 	grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-
-	padding: 1rem 0;
+	padding: 2rem;
 
 	:hover {
 		background-color: ${(props) => props.theme.accentHover};

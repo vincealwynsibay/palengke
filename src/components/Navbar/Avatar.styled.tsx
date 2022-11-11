@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../app/firebase";
 import { BsPersonCircle } from "react-icons/bs";
 import styled from "styled-components";
@@ -57,6 +57,7 @@ const Menu = styled.div`
 function Avatar({}: Props) {
 	const { ref, isComponentVisible, setIsComponentVisible } =
 		useComponentVisible(false);
+	const navigate = useNavigate();
 
 	return (
 		<Container
@@ -68,7 +69,13 @@ function Avatar({}: Props) {
 			{isComponentVisible && (
 				<Menu>
 					<Link to='/orders'>Orders</Link>
-					<a href='#' onClick={() => signOut(auth)}>
+					<a
+						href='#'
+						onClick={() => {
+							signOut(auth);
+							navigate("/");
+						}}
+					>
 						Logout
 					</a>
 				</Menu>

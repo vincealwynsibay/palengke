@@ -42,6 +42,7 @@ const Input = styled.input`
 `;
 const Button = styled.button`
 	background-color: ${(props) => props.theme.accent};
+	cursor: pointer;
 	border: none;
 	padding: 1rem 2rem;
 	font-weight: 700;
@@ -91,10 +92,6 @@ function Login({}: Props) {
 		e.preventDefault();
 		// login user and if successful redirect to home page
 		await signInWithEmailAndPassword(formData.email, formData.password);
-
-		if (!loading && !error) {
-			navigate("/");
-		}
 	};
 
 	return (

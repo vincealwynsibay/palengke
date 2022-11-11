@@ -42,6 +42,7 @@ const Input = styled.input`
 `;
 const Button = styled.button`
 	background-color: ${(props) => props.theme.accent};
+	cursor: pointer;
 	border: none;
 	padding: 1rem 2rem;
 	font-weight: 700;

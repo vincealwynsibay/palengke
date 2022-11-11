@@ -11,10 +11,9 @@ interface Props {
 const CartItem = styled.div`
 	display: grid;
 	font-size: 0.8rem;
+	padding: 2rem;
 
 	grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-
-	padding: 1rem 0;
 
 	:hover {
 		background-color: ${(props) => props.theme.accentHover};

@@ -8,6 +8,7 @@ const Header = styled.div`
 	font-size: 0.8rem;
 	grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
 	text-transform: uppercase;
+	padding: 2rem;
 
 	@media (min-width: 48rem) {
 		gap: 1rem;

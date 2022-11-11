@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../../app/firebase";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -46,6 +46,8 @@ export default function NavMenu({ toggle }: Props) {
 		setIsComponentVisible(toggle);
 	}, [toggle]);
 
+	const navigate = useNavigate();
+
 	return (
 		<>
 			{isComponentVisible && (
@@ -54,7 +56,13 @@ export default function NavMenu({ toggle }: Props) {
 						<>
 							<Link to='/shoppingCart'>Shopping Cart</Link>
 							<Link to='/orders'>Orders</Link>
-							<a href='#' onClick={() => signOut(auth)}>
+							<a
+								href='#'
+								onClick={() => {
+									signOut(auth);
+									navigate("/");
+								}}
+							>
 								Logout
 							</a>
 						</>
