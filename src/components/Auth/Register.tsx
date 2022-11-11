@@ -26,19 +26,22 @@ const Header = styled.h2`
 const InputContainer = styled.div`
 	margin-bottom: 1.5rem;
 `;
-const Label = styled.label`
-	text-transform: uppercase;
-	margin-bottom: 1.5rem;
-`;
+const Label = styled.label``;
 const Input = styled.input`
 	display: block;
 	background: none;
-	border: 1px solid #1a202c;
+	border: 1px solid ${(props) => props.theme.accent};
 	padding: 1rem;
 	width: 100%;
+	border-radius: 20px;
+
+	:focus {
+		outline: none;
+		border: 1px solid ${(props) => props.theme.accentHover};
+	}
 `;
 const Button = styled.button`
-	background-color: #1dbe74;
+	background-color: ${(props) => props.theme.accent};
 	border: none;
 	padding: 1rem 2rem;
 	font-weight: 700;
@@ -46,10 +49,18 @@ const Button = styled.button`
 	color: #fff;
 	text-transform: uppercase;
 	width: 100%;
+	border-radius: 20px;
+
+	:hover {
+		background-color: ${(props) => props.theme.accentHover};
+	}
 `;
 
 const RedirectLink = styled(Link)`
-	color: #1dbe74;
+	color: ${(props) => props.theme.accent};
+	:hover {
+		color: ${(props) => props.theme.accentHover};
+	}
 `;
 
 function Register({}: Props) {

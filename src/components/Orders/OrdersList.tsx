@@ -4,6 +4,8 @@ import { useCollection, useDocument } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
 import { db } from "../../app/firebase";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import Wrapper from "../Layout/Wrapper";
+import Loading from "../Loading/Loading";
 import OrderHeader from "./OrderHeader";
 import OrderItem from "./OrderItem";
 
@@ -36,7 +38,7 @@ function OrdersList({}: Props) {
 
 	return (
 		<Container>
-			{loading && <div>loading... </div>}
+			{loading && <Loading />}
 
 			<OrderItemsContainer>
 				<OrderHeader />

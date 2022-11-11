@@ -10,6 +10,23 @@ const Hero = styled.div`
 	position: relative;
 	height: 50vh;
 	z-index: -1;
+
+	h1 {
+		font-size: 2.4rem;
+		margin-bottom: 0.6rem;
+		z-index: 2;
+		> span {
+			color: ${(props) => props.theme.accent};
+		}
+	}
+
+	p {
+		font-size: 1.2rem;
+		z-index: 2;
+		> span {
+			color: ${(props) => props.theme.accent};
+		}
+	}
 `;
 
 const Overlay = styled.div`
@@ -34,10 +51,12 @@ function Home({}: Props) {
 		<div>
 			<Hero>
 				<Overlay>
-					<h1>Welcome to the Palengke!</h1>
+					<h1>
+						Welcome to the <span> Palengke! </span>
+					</h1>
 					<p>
-						A place where you can buy organic and high quality
-						products.
+						A place where you can buy <span>organic</span> and{" "}
+						<span>high quality</span> products.
 					</p>
 				</Overlay>
 			</Hero>

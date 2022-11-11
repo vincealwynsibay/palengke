@@ -57,7 +57,11 @@ function ProductsList({}: Props) {
 	}, [loading, filter]);
 
 	if (loading) {
-		return <div>loading...</div>;
+		return (
+			<Wrapper>
+				<div>loading...</div>
+			</Wrapper>
+		);
 	}
 
 	const filterList = ["all", "fruit", "vegetable", "dairy", "meat"];
@@ -67,7 +71,11 @@ function ProductsList({}: Props) {
 			<div className=''>
 				<SortFilterContainer>
 					<SearchBar className='' />
-					<Filter list={filterList} setFilter={setFilter} />
+					<Filter
+						list={filterList}
+						value={filter}
+						setFilter={setFilter}
+					/>
 				</SortFilterContainer>
 
 				<Container className='products-list'>

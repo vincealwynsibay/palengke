@@ -20,7 +20,7 @@ const Menu = styled.div`
 	z-index: 999;
 	text-align: center;
 	background: #fff;
-	border-radius: 3px;
+	border-radius: 20px;
 	width: 16.5rem;
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
@@ -29,7 +29,7 @@ const Menu = styled.div`
 		padding: 1rem 1rem;
 
 		:hover {
-			background: #f8fbfa;
+			background: ${(props) => props.theme.accentHover};
 		}
 	}
 	@media screen and (min-width: 48rem) {

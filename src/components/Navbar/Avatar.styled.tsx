@@ -8,14 +8,29 @@ import useComponentVisible from "../../hooks/useComponentVisible";
 
 interface Props {}
 
+const Container = styled.div`
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	cursor: pointer;
+	position: relative;
+	padding: 0.8rem 1.5rem;
+
+	:hover::before {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-bottom: 1px solid ${(props) => props.theme.accent};
+	}
+`;
+
 const AvatarIcon = styled(BsPersonCircle)`
 	transform: scale(1.5);
 	position: relative;
 	cursor: pointer;
-
-	:hover {
-		color: #1cb66e;
-	}
+	color: ${(props) => props.theme.black};
 `;
 
 const Menu = styled.div`
@@ -23,7 +38,8 @@ const Menu = styled.div`
 	flex-direction: column;
 	position: absolute;
 	top: 100%;
-	transform: translate(-50%, 0);
+	left: 0;
+	right: 0;
 	background: #fff;
 	border-radius: 3px;
 	z-index: 999;
@@ -33,7 +49,7 @@ const Menu = styled.div`
 		padding: 0.7rem 1rem;
 
 		:hover {
-			background: #f8fbfa;
+			background: ${(props) => props.theme.accentHover};
 		}
 	}
 `;
@@ -43,10 +59,12 @@ function Avatar({}: Props) {
 		useComponentVisible(false);
 
 	return (
-		<div ref={ref}>
-			<AvatarIcon
-				onClick={() => setIsComponentVisible(!isComponentVisible)}
-			/>
+		<Container
+			ref={ref}
+			onClick={() => setIsComponentVisible(!isComponentVisible)}
+		>
+			<AvatarIcon />
+			Account
 			{isComponentVisible && (
 				<Menu>
 					<Link to='/orders'>Orders</Link>
@@ -55,7 +73,7 @@ function Avatar({}: Props) {
 					</a>
 				</Menu>
 			)}
-		</div>
+		</Container>
 	);
 }
 

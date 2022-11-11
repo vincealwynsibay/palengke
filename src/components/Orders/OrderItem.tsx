@@ -13,7 +13,7 @@ const Item = styled.div`
 	padding: 1rem 0;
 
 	:hover {
-		background: #f8fbfa;
+		background-color: ${(props) => props.theme.accentHover};
 	}
 
 	@media (min-width: 48rem) {

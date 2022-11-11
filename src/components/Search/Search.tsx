@@ -7,41 +7,35 @@ interface Props {
 }
 
 const Form = styled.form`
-	display: grid;
-	grid-template-columns: 1fr minmax(45px, 10%);
 	margin: 1rem 0;
-	width: clamp(20rem, 30rem, 40rem);
-	@media screen and (min-width: 48rem) {
+	position: relative;
+	width: 25rem;
+	@media screen and (min-width: 480px) {
 		margin: 0;
 	}
 `;
 
 const Input = styled.input`
-	border: 1px solid #1a202c;
-	border-radius: 3px 0 0 3px;
-	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 20px;
+	padding: 0.8rem 1.5rem;
+	padding-left: 48px;
+	font-size: 1rem;
+	width: 100%;
+	background-color: ${(props) => props.theme.primary};
 
 	:focus {
 		outline: none;
 	}
 `;
 
-const Button = styled.button`
-	cursor: pointer;
-	border: 1px solid #1a202c;
-	border-radius: 0 3px 3px 0;
-	padding: 0.5rem 1rem;
-	background: #1dbe74;
-	transition: background-color 0.2s ease-in-out;
-	:hover {
-		background-color: #1cb66e;
-	}
-`;
-
 const SearchIcon = styled(BsSearch)`
+	position: absolute;
+	left: 15px;
+	top: 50%;
 	width: 1rem;
-	color: white;
-	transform: scale(1.5);
+	color: ${(props) => props.theme.accent};
+	transform: translate(0, -50%) scale(1.3);
 `;
 
 function Search({ className }: Props) {
@@ -58,14 +52,14 @@ function Search({ className }: Props) {
 	};
 
 	return (
-		<div className={className}>
-			<Form onSubmit={handleSubmit}>
-				<Input type='text' onChange={(e) => setQuery(e.target.value)} />
-				<Button>
-					<SearchIcon />
-				</Button>
-			</Form>
-		</div>
+		<Form className={className} onSubmit={handleSubmit}>
+			<Input
+				type='text'
+				placeholder='Search'
+				onChange={(e) => setQuery(e.target.value)}
+			/>
+			<SearchIcon />
+		</Form>
 	);
 }
 

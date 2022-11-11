@@ -36,7 +36,7 @@ const TotalPrice = styled.p`
 `;
 const Button = styled.button`
 	cursor: pointer;
-	background: #1dbe74;
+	background-color: ${(props) => props.theme.accent};
 	border: none;
 	padding: 1rem 2rem;
 	color: #fff;
@@ -47,7 +47,7 @@ const Button = styled.button`
 
 	transition: background-color 0.2s ease-in-out transform 0.2s ease-in-out;
 	:hover {
-		background-color: #1cb66e;
+		background-color: ${(props) => props.theme.accentHover};
 		transform: translateY(-1px);
 	}
 
